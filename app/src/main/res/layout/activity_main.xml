@@ -1,16 +1,348 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context=".MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical" >
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#fc6d02"
+        >
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-</RelativeLayout>
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/iv_push_back"
+                android:src="@drawable/activity_myoldbook_back"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center_vertical"
+                android:background="#00ffffff"
+                android:layout_marginLeft="10dp"
+                />
+
+            <Button
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/bt_push_back"
+                android:background="#00ffffff"
+                />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_push_title"
+            android:text="发布旧书"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#eaeaea"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="25dp" >
+
+                <ImageButton
+                    android:id="@+id/camera1"
+                    android:layout_width="60dp"
+                    android:layout_height="42dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignRight="@+id/school"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/activity_push_selector_camera"
+                    android:scaleType="fitCenter"
+                    android:text="照相" />
+                <ImageView
+                    android:layout_width="180dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/push_photoline"
+                    android:id="@+id/iv_activity_push_photoline"
+                    android:scaleType="fitCenter"/>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="275dp"
+                android:layout_height="99dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/push_describe"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:id="@+id/bookname"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="true"
+                    android:hint="输入书名"
+                    android:textColorHint="#BCBCBC"
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:selectAllOnFocus="true"
+                    android:textColor="#565656"
+                    android:textSize="14dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#eaeaea" >
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/Describe1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="80dp"
+                    android:background="@null"
+                    android:editable="true"
+                    android:hint="亲，简单介绍一下你的书叭"
+                    android:textColorHint="#BCBCBC"
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:selectAllOnFocus="true"
+                    android:textColor="#565656"
+                    android:textSize="14dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="6dp"
+                    android:singleLine="true"
+                    android:gravity="left|top"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="275dp"
+                android:layout_height="101dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/push_detailedge"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <ImageView
+                        android:layout_width="21dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/activity_push_money" />
+
+                    <EditText
+                        android:id="@+id/price1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="33dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:hint="转让价格"
+                        android:textColorHint="#BCBCBC"
+                        android:maxLength="2"
+                        android:inputType="text"
+                        android:selectAllOnFocus="true"
+                        android:textColor="#565656"
+                        android:textSize="14dp"
+                        android:layout_marginLeft="10dp" >
+                    </EditText>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#eaeaea" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <ImageView
+                        android:layout_width="20.5dp"
+                        android:layout_height="16.5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/activity_push_location" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <Button
+                            android:id="@+id/school"
+                            android:paddingLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="left|center_vertical"
+                            android:background="@android:color/transparent"
+                            android:text="选择校区 "
+                            android:textColor="#565656"
+                            android:textSize="14dp" />
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/activity_push_choose"
+                            android:scaleType="fitCenter"
+                            />
+
+                    </FrameLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#eaeaea" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="19dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/activity_push_classify" />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <Button
+                            android:id="@+id/category1"
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="left|center_vertical"
+                            android:background="@android:color/transparent"
+                            android:text="选择分类"
+                            android:textColor="#565656"
+                            android:textSize="14dp"
+                            android:paddingLeft="10dp"/>
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/activity_push_choose"
+                            android:scaleType="fitCenter"
+                            />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="275dp"
+                android:layout_height="66dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/push_contactedge"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/activity_push_tel"
+                        android:scaleType="fitCenter" />
+
+                    <EditText
+                        android:id="@+id/tel1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="33dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="输入手机号码"
+                        android:maxLength="11"
+                        android:textColorHint="#BCBCBC"
+                        android:layout_marginLeft="10dp"
+                        android:inputType="text"
+                        android:selectAllOnFocus="true"
+                        android:textColor="#565656"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#eaeaea" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/activity_push_qq" />
+
+                    <EditText
+                        android:id="@+id/qqnumber1"
+                        android:layout_width="match_parent"
+                        android:layout_height="33dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="输入QQ号码"
+                        android:maxLength="10"
+                        android:textColorHint="#BCBCBC"
+                        android:inputType="text"
+                        android:selectAllOnFocus="true"
+                        android:textColor="#565656"
+                        android:textSize="14dp"
+                        android:layout_marginLeft="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/push"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/activity_push_selector_pushbtn"
+                android:text="发  布" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
