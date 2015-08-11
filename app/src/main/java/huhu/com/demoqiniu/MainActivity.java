@@ -30,10 +30,8 @@ import android.provider.MediaStore;
 import android.telephony.TelephonyManager;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -44,7 +42,6 @@ import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -65,7 +62,6 @@ public class MainActivity extends Activity {
     @SuppressLint("NewApi")
     Button bt_school, bt_category, bt_push, bt_push_back;
     ImageButton bt_camera;
-    int schoolnumber, categorynumber;
     private int CAMERA = 0;
     private final String IMAGE_TYPE = "image/*";
     private int IMAGE_CODE = 1;
@@ -96,39 +92,13 @@ public class MainActivity extends Activity {
             // TODO Auto-generated method stub
             switch (msg.what) {
                 case 0:
-                    String result0 = msg.obj.toString();
-                    JSONObject jsonObject;
-                    try {
-                        jsonObject = new JSONObject(result0);
-                        bad_times = jsonObject.getString("bad_times");
-                        date = jsonObject.getString("time");
-                    } catch (JSONException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    if (result0.equalsIgnoreCase("-1") || bad_times.equalsIgnoreCase("0") ) {
-                        pushInit();
-                    } else {
-                        progress.dismiss();
-
-                    }
+                    pushInit();
                     break;
                 case 1:
                     String token = msg.obj.toString();
-                    System.out.println("=========" + token);
                     UploadPic(filename, IMEI + time, token);
                     break;
                 case 2:
-                    String result = msg.obj.toString();
-                    if (result.equals("1")) {
-
-                        progress.dismiss();
-                        finish();
-                    } else if (result.equals("0")) {
-
-                        progress.dismiss();
-                    }
-                    bt_push.setEnabled(true);
                     break;
 
             }
@@ -141,35 +111,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         iv_push_back = (ImageView) findViewById(R.id.iv_push_back);
-        bt_push_back = (Button) findViewById(R.id.bt_push_back);
-        bt_push_back.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                str_phone = edt_phonenumber.getText().toString().trim();
-                str_QQ = edt_QQnumber.getText().toString().trim();
-                str_price = edt_price.getText().toString().trim();
-                str_name = edt_name.getText().toString().trim();
-                campus = bt_school.getText().toString().trim();
-                type = bt_category.getText().toString().trim();
-                details = describe.getText().toString().trim();
-            }
-        });
-        bt_push_back.setOnTouchListener(new OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    iv_push_back.setImageResource(R.drawable.activity_push_back_pressed);
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    iv_push_back.setImageResource(R.drawable.activity_myoldbook_back);
-                }
-                return false;
-            }
-        });
         // 照相的功能在这里实现
         bt_camera = (ImageButton) findViewById(R.id.camera1);
         // 选择拍照还是照片
@@ -197,13 +138,8 @@ public class MainActivity extends Activity {
                 builder.show();
             }
         });
-
-
-        edt_QQnumber = (EditText) findViewById(R.id.qqnumber1);
         bt_push = (Button) findViewById(R.id.push);
-        edt_phonenumber = (EditText) findViewById(R.id.tel1);
-        edt_price = (EditText) findViewById(R.id.price1);
-        edt_name = (EditText) findViewById(R.id.bookname);
+
         iv_activity_push_photoline = (ImageView) findViewById(R.id.iv_activity_push_photoline);
 
         bt_push.setOnClickListener(new OnClickListener() {
@@ -326,8 +262,6 @@ public class MainActivity extends Activity {
                     Bundle bundle = data.getExtras();
                     // 获取相机返回的数据，并转换为图片格式
                     Bitmap camera_bitmap = (Bitmap) bundle.get("data");
-                    // camera_bitmap =
-                    // ThumbnailUtils.extractThumbnail(camera_bitmap, 300, 400);
                     iv_activity_push_photoline.setImageBitmap(outputBitmap(camera_bitmap));
                     bt_camera.setBackgroundDrawable(null);
                     hasPicture = true;
@@ -345,21 +279,15 @@ public class MainActivity extends Activity {
                     try {
                         Uri uri = data.getData();
                         if (uri == null) {
-                            Log.i("张雯", "huhu");
                             return;
                         }
-                        Log.i("张糊糊", uri.toString());
                         String[] filePathColumn = {MediaStore.Images.Media.DATA};
                         Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
                         cursor.moveToFirst();
-                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                        // filename = cursor.getString(columnIndex);
-
                         ContentResolver cr = this.getContentResolver();
 
                         Bitmap album_bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
                         if (album_bitmap == null) {
-                            Log.i("张雯", "糊糊");
                         }
                         album_bitmap = ThumbnailUtils.extractThumbnail(album_bitmap, 150, 180);
                         iv_activity_push_photoline.setImageBitmap(outputBitmap(album_bitmap));
